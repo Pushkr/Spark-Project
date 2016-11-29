@@ -25,9 +25,6 @@ def pagefetcher(temp_url):
         except ChunkedEncodingError:
             print("\nSite response delayed, skipping retrieval..: {0}".format(sys.exc_info()[0]))
             return None
-        # except :
-        #    print("\nError connecting site\n")
-        #    return None
         finally:
             if len(temp_rows) > 0:
                 return temp_rows
@@ -90,10 +87,10 @@ def rowfetcher(row):
 
 
 def main():
+    # setup SparkContext
     conf = SparkConf().setAppName("Craigslist_1.0")
     sc = SparkContext(conf=conf)
     hc = HiveContext(sc)
-
     s_page = "&s="
 
     totalCount = 0
@@ -146,7 +143,7 @@ def main():
         postsRDD = pagesRDD.map(rowfetcher)
 
         #Save data with \001 as field delimiter 
-        #postsRDD.map(lambda row: "\001".join(row)).saveAsTextFile("craigslist/rawdata")
+        postsRDD.map(lambda row: "\001".join(row)).saveAsTextFile("craigslist/rawdata")
 
         avgPrice = postsRDD.filter(lambda row : row[2] != "Not Listed") \
                     .map(lambda row: (int(row[2].strip("$").strip(",")))) \
@@ -154,9 +151,9 @@ def main():
 
         print("average price is {}".format(avgPrice[0]/avgPrice[1]))
 
-        #wordCount= postsRDD.flatMap(lambda row:row[8].replace("##","\n")). \
-        #    map(lambda row : row.split(" ")). \
-        #    map(lambda word: (word,1)).reduceByKey(lambda x,y : x+y).sortBy(lambda x: -x[1])
+        wordCount= postsRDD.flatMap(lambda row:row[8].replace("##","\n")). \
+            map(lambda row : row.split(" ")). \
+            map(lambda word: (word,1)).reduceByKey(lambda x,y : x+y).sortBy(lambda x: -x[1])
 
         wordCount.saveAsTextFile("craigslist/wordcount/nissan2015")
 
