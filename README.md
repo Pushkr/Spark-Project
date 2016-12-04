@@ -11,7 +11,7 @@ Aim of this project is to -
  
 `Disclaimer`: Data collected from craigslist in this project is by no means is a 'Big Data' but since the comodity hardware on which this project is built is of limited capability and resources, this collected data is used as just a sliced representation of actual data which might be available on craigslist servers.
 
-`DataCollector.py` is entry point of this project. This code essentially contains lot of reused code from  a [my own web scapper](https://github.com/Pushkr/CraigslistToCsv) which essentially started as fun project but which later turned in to 
+`DataCollector.py` is entry point of this project. This code essentially contains lot of reused code from  a [my own web scraper](https://github.com/Pushkr/CraigslistToCsv) which essentially started as fun project but which later turned in to 
 a complete API development work. 
 
 This module starts with sending a single `request` to craigslist server along with search string. The response from server contains the number of craigslist posts currently available for the search string i.e `totalCount`.
@@ -56,6 +56,7 @@ Following observations can be made from this graph:
 5. sharp incline at the begining for nissan is due to the fact that nissan rogue came into market in 2007 while toyota and Hondas were in this segment since 1994. 
 
 
-Future enhancements :
+Future enhancements/work in progress :
 
-- [] TBD
+- [ ] plot price graphs
+- [ ] TBD
