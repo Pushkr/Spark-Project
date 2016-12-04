@@ -174,8 +174,6 @@ def main():
 
     s_page = "&s="
 
-
-
     totalCount = 0
 
     pages = {}
@@ -197,7 +195,6 @@ def main():
         pages = soup.find("span", {"class": "button pagenum"})
 
 
-
     except IOError:
 
         print("\n Unexpected error : {0}".format(sys.exc_info()[0]))
@@ -211,9 +208,6 @@ def main():
         return
 
     
-
-
-
     if pages is not None and pages.text != 'no results':
 
         totalCount = int(pages.find("span", {"class": "totalcount"}).text)
@@ -223,14 +217,9 @@ def main():
         totalCount = 0
 
             
-
     urlList = []
 
-
-
     print ("\n\n\n\n found {} results \n\n\n\n".format(totalCount))
-
-
 
     if totalCount ==0 :
 
@@ -278,10 +267,10 @@ def main():
         postsRDD = sc.textFile("craigslist/rawdata").cache()
 
         prices = postsRDD.map(lambda row : row.split("\001")) \
-        .filter(lambda row : len(row) >= 2) \
-        .map(lambda row: row[2]) \
-        .filter(lambda row : row != "Not Listed")\
-        .map(lambda row: int(row.strip("$")))
+                        .filter(lambda row : len(row) >= 2) \
+                        .map(lambda row: row[2]) \
+                        .filter(lambda row : row != "Not Listed")\
+                        .map(lambda row: int(row.strip("$")))
 
         
 
@@ -301,10 +290,8 @@ def main():
 
         print("most common occuring price is {}".format(statistics.mode(prices.collect())))
 
-        
 
         # finding the most frequent words in all craigslists posting
-
 
 
        wcRDD= postsRDD.map(lambda row : row.split("\001")) \
@@ -326,8 +313,6 @@ def main():
         pass
 
     sc.stop()
-
-
 
 
 
