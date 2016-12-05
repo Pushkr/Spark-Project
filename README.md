@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/Pushkr/Spark-Project/badges/gpa.svg)](https://codeclimate.com/github/Pushkr/Spark-Project)        [![Issue Count](https://codeclimate.com/github/Pushkr/Spark-Project/badges/issue_count.svg)](https://codeclimate.com/github/Pushkr/Spark-Project)
+
 ### Analysis of compact segament SUVs 
 Aim of this project is to - 
 - analyse selling trends of compact sengment SUVs based on data collected from craigslist.com
